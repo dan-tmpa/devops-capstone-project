@@ -132,7 +132,7 @@ def delete_accounts(id):
     if account:
         account.delete()
     else:
-        abort(status.HTTP_404_NOT_FOUND, f"Account with id [{id}] could not be found.")
+        abort(status.HTTP_405_METHOD_NOT_ALLOWED, "Method not allowed")
 
     # use the Account.find() method to retrieve the account by the account_id
     # if found, call the delete() method on the account

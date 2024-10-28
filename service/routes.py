@@ -18,6 +18,7 @@ def health():
     """Health Status"""
     return jsonify(dict(status="OK")), status.HTTP_200_OK
 
+
 ######################################################################
 # GET INDEX
 ######################################################################
@@ -32,6 +33,7 @@ def index():
         ),
         status.HTTP_200_OK,
     )
+
 
 ######################################################################
 # CREATE A NEW ACCOUNT
@@ -55,10 +57,10 @@ def create_accounts():
         jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
     )
 
+
 ######################################################################
 # LIST ALL ACCOUNTS
 ######################################################################
-
 @app.route("/accounts", methods=["GET"])
 def list_accounts():
     """
@@ -71,10 +73,10 @@ def list_accounts():
     for account in accounts:
         accounts_list.append(account.serialize())
     app.logger.info("%s accounts being returned.", len(accounts_list))
-    
+
     # use the Account.all() method to retrieve all accounts
     # create a list of serialize() accounts
-    # log the number of accounts being returned in the list 
+    # log the number of accounts being returned in the list
     # return the list with a return code of status.HTTP_200_OK
     return jsonify(accounts_list), 200
 
@@ -93,7 +95,7 @@ def read_account(id):
     account = Account.find(id)
     if not account:
         abort(status.HTTP_404_NOT_FOUND, f"Account with id [{id}] could not be found.")
-    
+
     return account.serialize(), status.HTTP_200_OK
 
 
@@ -117,6 +119,7 @@ def update_accounts(id):
     account.update()
 
     return account.serialize(), status.HTTP_200_OK
+
 
 ######################################################################
 # DELETE AN ACCOUNT
